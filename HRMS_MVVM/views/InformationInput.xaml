@@ -3,10 +3,80 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:HRMS_MVVM.views"
+        xmlns:local="clr-namespace:HRMS_MVVM.views" ResizeMode="NoResize"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="人事信息录入" Height="450" Width="800">
-    <Grid>
-        
+        Title="人事信息录入" Height="450" Width="643.388">
+    
+    <Grid Margin="1">
+        <Border BorderBrush="#FFACACAC" BorderThickness="1">
+            <TabControl>
+                <TabItem Header="职工基本信息">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="120"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="85.714"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                    <TextBlock Text="职工编号：" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                    <TextBox Name="id" Margin="0,0,0,0.4" Width="130" VerticalAlignment="Center" />
+                                    <TextBlock Text="职工姓名：" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                    <TextBox Name="name" Margin="0,0,0,0.4" Width="130" VerticalAlignment="Center" />
+                                    <TextBlock Text="民族：" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                    <ComboBox x:Name="nation" SelectedValue="汉族" Margin="0,0,0,0.4" Width="95" VerticalAlignment="Center">
+                                        <ComboBoxItem Content="汉族"/>
+                                        <ComboBoxItem Content="土家族"/>
+                                        <ComboBoxItem Content="苗族"/>
+                                    </ComboBox>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                    <TextBlock Text="出生日期：" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                    <TextBox Name="birthday" Margin="0,0,0,0.4" Width="155" VerticalAlignment="Center" />
+                                    <TextBlock Text="年龄：" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                    <TextBox Name="age" Margin="0,0,0,0.4" Width="130" VerticalAlignment="Center" />
+                                    <TextBlock Text="性别：" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                    <ComboBox x:Name="gender" SelectedValue="汉族" Margin="0,0,0,0.4" Width="94" VerticalAlignment="Center">
+                                        <ComboBoxItem Content="男"/>
+                                        <ComboBoxItem Content="女"/>
+                                    </ComboBox>
+                                </StackPanel>
+                            </Grid>
+                            
+                            <Image Grid.Column="1" Source="/HRMS_MVVM;component/images/4646.jpg"/>
+                                                        
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="85.714"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                        
+                    </Grid>
+                </TabItem>
+                <TabItem Header="工作简历">
+                    <Grid>
+                        <Image Source="/HRMS_MVVM;component/images/4646.jpg"/>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Border>
     </Grid>
 </Window>
