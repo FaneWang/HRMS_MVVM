@@ -38,7 +38,7 @@
                                     <TextBlock Text="职工姓名：" VerticalAlignment="Center" Margin="5,0,0,0"/>
                                     <TextBox Name="name" Margin="0,0,0,0.4" Width="130" VerticalAlignment="Center" />
                                     <TextBlock Text="民族：" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                                    <ComboBox x:Name="nation" SelectedValue="汉族" Margin="0,0,0,0.4" Width="95" VerticalAlignment="Center">
+                                    <ComboBox x:Name="nation" SelectedIndex="1" Margin="0,0,0,0.4" Width="95" VerticalAlignment="Center">
                                         <ComboBoxItem Content="汉族"/>
                                         <ComboBoxItem Content="土家族"/>
                                         <ComboBoxItem Content="苗族"/>
@@ -51,7 +51,7 @@
                                     <TextBlock Text="年龄：" VerticalAlignment="Center" Margin="5,0,0,0"/>
                                     <TextBox Name="age" Margin="0,0,0,0.4" Width="130" VerticalAlignment="Center" />
                                     <TextBlock Text="性别：" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                                    <ComboBox x:Name="gender" SelectedValue="汉族" Margin="0,0,0,0.4" Width="94" VerticalAlignment="Center">
+                                    <ComboBox x:Name="gender" SelectedIndex="0" Margin="0,0,0,0.4" Width="94" VerticalAlignment="Center">
                                         <ComboBoxItem Content="男"/>
                                         <ComboBoxItem Content="女"/>
                                     </ComboBox>
