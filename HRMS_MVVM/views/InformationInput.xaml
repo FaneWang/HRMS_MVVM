@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HRMS_MVVM.views" ResizeMode="NoResize"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="人事信息录入" Height="450" Width="643.388">
+        Title="人事信息录入" Height="371.875" Width="524">
     
     <Grid Margin="1">
         <Border BorderBrush="#FFACACAC" BorderThickness="1">
@@ -14,6 +14,10 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="120"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
                             <RowDefinition Height="30"/>
                             <RowDefinition Height="30"/>
                             <RowDefinition Height="30"/>
@@ -34,11 +38,11 @@
 
                                 <StackPanel Grid.Row="0" Orientation="Horizontal">
                                     <TextBlock Text="职工编号：" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                                    <TextBox Name="id" Margin="0,0,0,0.4" Width="130" VerticalAlignment="Center" />
+                                    <TextBox Name="id" Margin="0,0,0,0.4" Width="80" VerticalAlignment="Center" />
                                     <TextBlock Text="职工姓名：" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                                    <TextBox Name="name" Margin="0,0,0,0.4" Width="130" VerticalAlignment="Center" />
+                                    <TextBox Name="name" Margin="0,0,0,0.4" Width="80" VerticalAlignment="Center" />
                                     <TextBlock Text="民族：" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                                    <ComboBox x:Name="nation" SelectedIndex="1" Margin="0,0,0,0.4" Width="95" VerticalAlignment="Center">
+                                    <ComboBox x:Name="nation" SelectedIndex="1" Margin="0,0,0,0.4" Width="70" VerticalAlignment="Center">
                                         <ComboBoxItem Content="汉族"/>
                                         <ComboBoxItem Content="土家族"/>
                                         <ComboBoxItem Content="苗族"/>
@@ -47,14 +51,46 @@
 
                                 <StackPanel Grid.Row="1" Orientation="Horizontal">
                                     <TextBlock Text="出生日期：" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                                    <TextBox Name="birthday" Margin="0,0,0,0.4" Width="155" VerticalAlignment="Center" />
+                                    <TextBox Name="birthday" Margin="0,0,0,0.4" Width="110" VerticalAlignment="Center" />
                                     <TextBlock Text="年龄：" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                                    <TextBox Name="age" Margin="0,0,0,0.4" Width="130" VerticalAlignment="Center" />
+                                    <TextBox Name="age" Margin="0,0,0,0.4" Width="80" VerticalAlignment="Center" />
                                     <TextBlock Text="性别：" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                                    <ComboBox x:Name="gender" SelectedIndex="0" Margin="0,0,0,0.4" Width="94" VerticalAlignment="Center">
+                                    <ComboBox x:Name="gender" SelectedIndex="0" Margin="0,0,0,0.4" Width="64" VerticalAlignment="Center">
                                         <ComboBoxItem Content="男"/>
                                         <ComboBoxItem Content="女"/>
                                     </ComboBox>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                                    <TextBlock Text="婚姻：" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                    <ComboBox x:Name="marriage" SelectedIndex="0" Margin="0,0,0,0.4" Width="65" VerticalAlignment="Center">
+                                        <ComboBoxItem Content="已婚"/>
+                                        <ComboBoxItem Content="未婚"/>
+                                    </ComboBox>
+                                    <TextBlock Text="文化程度：" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                    <ComboBox x:Name="education" SelectedIndex="4" Margin="0,0,0,0.4" Width="75" VerticalAlignment="Center">
+                                        <ComboBoxItem Content="以下"/>
+                                        <ComboBoxItem Content="高中"/>
+                                        <ComboBoxItem Content="中专"/>
+                                        <ComboBoxItem Content="大专"/>
+                                        <ComboBoxItem Content="本科"/>
+                                        <ComboBoxItem Content="研究生"/>
+                                        <ComboBoxItem Content="博士"/>
+                                    </ComboBox>
+                                    <TextBlock Text="政治面貌：" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                    <ComboBox x:Name="politics" SelectedIndex="0" Margin="0,0,0,0.4" Width="90" VerticalAlignment="Center">
+                                        <ComboBoxItem Content="群众"/>
+                                        <ComboBoxItem Content="共青团员"/>
+                                        <ComboBoxItem Content="中共党员"/>
+                                        <ComboBoxItem Content="其他"/>
+                                    </ComboBox>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="3" Orientation="Horizontal">
+                                    <TextBlock Text="身份证：" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                    <TextBox Name="card" Margin="0,0,0,0.4" Width="149" VerticalAlignment="Center" />
+                                    <TextBlock Text="参加工作时间：" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                    <TextBox Name="begin" Margin="0,0,0,0.4" Width="110" VerticalAlignment="Center" />
                                 </StackPanel>
                             </Grid>
                             
@@ -67,8 +103,89 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="85.714"/>
                             </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="工龄：" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                    <TextBox Name="seniority" Margin="0,0,0,0.4" Width="60" VerticalAlignment="Center" />
+                                    <TextBlock Text="籍贯：" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                    <ComboBox x:Name="province" SelectedIndex="4" Margin="0,0,0,0.4" Width="102" VerticalAlignment="Center">
+                                        <ComboBoxItem Content="以下"/>
+                                        <ComboBoxItem Content="高中"/>
+                                        <ComboBoxItem Content="中专"/>
+                                        <ComboBoxItem Content="大专"/>
+                                        <ComboBoxItem Content="本科"/>
+                                        <ComboBoxItem Content="研究生"/>
+                                        <ComboBoxItem Content="博士"/>
+                                    </ComboBox>
+                                    <TextBlock Text="省" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                    <ComboBox x:Name="city" SelectedIndex="0" Margin="15,0,0,0.4" Width="107" VerticalAlignment="Center">
+                                        <ComboBoxItem Content="群众"/>
+                                        <ComboBoxItem Content="共青团员"/>
+                                        <ComboBoxItem Content="中共党员"/>
+                                        <ComboBoxItem Content="其他"/>
+                                    </ComboBox>
+                                    <TextBlock Text="市" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="选择图片" Margin="0,4"/>
+                                    <Button Content="清除" Margin="6,4,0,4"/>
+                                </StackPanel>
+                            </Grid>
                         </Grid>
-                        
+
+                        <Grid Grid.Row="2">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="职务类别：" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                <TextBox Name="business" Margin="0,0,0,0.4" Width="90" VerticalAlignment="Center" />
+                                <TextBlock Text="月工资：" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                <TextBox Name="salary" Margin="0,0,0,0.4" Width="75" VerticalAlignment="Center" />
+                                <TextBlock Text="银行账号：" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                <TextBox Name="account" Margin="0,0,0,0.4" Width="148.5" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Grid.Row="3">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="部门类别：" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                <TextBox Name="branch" Margin="0,0,0,0.4" Width="85" VerticalAlignment="Center" />
+                                <TextBlock Text="手机：" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                <TextBox Name="mobile" Margin="0,0,0,0.4" Width="98" VerticalAlignment="Center" />
+                                <TextBlock Text="毕业学校：" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                <TextBox Name="school" Margin="0,0,0,0.4" Width="142.5" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Grid.Row="4">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="毕业时间：" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                <TextBox Name="graduation" Margin="0,0,0,0.4" Width="105" VerticalAlignment="Center" />
+                                <TextBlock Text="合同年限：" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                <TextBox Name="contract" Margin="0,0,0,0.4" Width="78" VerticalAlignment="Center" />
+                                <TextBlock Text="专业：" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                <TextBox Name="major" Margin="0,0,0,0.4" Width="142.5" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Grid.Row="5">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="家庭住址：" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                <TextBox Name="address" Margin="0,0,0,0.4" Width="432" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Grid.Row="6">
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="导出word文档" Margin="15,4,0,4" Width="101"/>
+                                <Button Content="添加" Margin="17,4,0,4" Width="75"/>
+                                <Button Content="修改" Margin="17,4,0,4" Width="75"/>
+                                <Button Content="删除" Margin="17,4,0,4" Width="75"/>
+                                <Button Content="取消" Margin="17,4,0,4" Width="75"/>
+                            </StackPanel>
+                        </Grid>
+
                     </Grid>
                 </TabItem>
                 <TabItem Header="工作简历">
