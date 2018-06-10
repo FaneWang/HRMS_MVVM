@@ -74,7 +74,7 @@
                                         <ComboBoxItem Content="中专"/>
                                         <ComboBoxItem Content="大专"/>
                                         <ComboBoxItem Content="本科"/>
-                                        <ComboBoxItem Content="研究生"/>
+                                        <ComboBoxItem Content="硕士"/>
                                         <ComboBoxItem Content="博士"/>
                                     </ComboBox>
                                     <TextBlock Text="政治面貌：" VerticalAlignment="Center" Margin="5,0,0,0"/>
