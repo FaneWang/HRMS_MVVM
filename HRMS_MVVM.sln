@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMS_SERVICE", "HRMS_SERVIC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMS_SERVICE_HOST", "HRMS_SERVICE_HOST\HRMS_SERVICE_HOST.csproj", "{6A2A9C30-7C15-4564-8F11-C965CB5B379D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMS_TEST", "HRMS_TEST\HRMS_TEST.csproj", "{CE59BE22-6B21-4845-A6CB-9ED031C8CB21}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{6A2A9C30-7C15-4564-8F11-C965CB5B379D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A2A9C30-7C15-4564-8F11-C965CB5B379D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A2A9C30-7C15-4564-8F11-C965CB5B379D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE59BE22-6B21-4845-A6CB-9ED031C8CB21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE59BE22-6B21-4845-A6CB-9ED031C8CB21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE59BE22-6B21-4845-A6CB-9ED031C8CB21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE59BE22-6B21-4845-A6CB-9ED031C8CB21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
