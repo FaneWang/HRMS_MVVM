@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using HRMS_MVVM.viewModels;
 using HRMS_MVVM.views;
 
 namespace HRMS_MVVM
@@ -27,6 +28,17 @@ namespace HRMS_MVVM
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = new MainWindowViewModel();
+            this.IsEnabledChanged += MainWindow_IsEnabledChanged;
+        }
+
+        //接受viewmodel造成isEnabled变化关闭窗口
+        private void MainWindow_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if ((bool)e.NewValue == false)
+            {
+                this.Close();
+            }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

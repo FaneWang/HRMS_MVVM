@@ -73,6 +73,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="commands\DelegateCommand.cs" />
     <Compile Include="views\InformationInput.xaml.cs">
       <DependentUpon>InformationInput.xaml</DependentUpon>
     </Compile>
@@ -143,9 +144,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="commands\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="images\4646.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
