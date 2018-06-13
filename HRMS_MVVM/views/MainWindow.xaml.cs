@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace HRMS_MVVM
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : CustomWindow
     {
         private Page1 page1;
         private Page2 page2;
@@ -29,13 +30,14 @@ namespace HRMS_MVVM
         {
             InitializeComponent();
             this.DataContext = new MainWindowViewModel();
-            this.IsEnabledChanged += MainWindow_IsEnabledChanged;
+            DependencyPropertyDescriptor descriptor = DependencyPropertyDescriptor.FromProperty(MainWindow.CloseStateProperty,typeof(MainWindow));
+            descriptor.AddValueChanged(this, CloseStatePropertyChanged);
         }
-
+        
         //接受viewmodel造成isEnabled变化关闭窗口
-        private void MainWindow_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void CloseStatePropertyChanged(object sender, EventArgs e)
         {
-            if ((bool)e.NewValue == false)
+            if (this.CloseState == 0)
             {
                 this.Close();
             }
@@ -60,5 +62,15 @@ namespace HRMS_MVVM
 
             frame.Content = page2;
         }
+
+        private void CustomWindow_Closing(object sender, CancelEventArgs e)
+        {
+            this.CurrentState = 0;
+        }
+
+        //private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        //{
+        //    this.IsEnabled = false;
+        //}
     }
 }

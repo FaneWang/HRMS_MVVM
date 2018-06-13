@@ -13,5 +13,6 @@ namespace HRMS_MVVM
     /// </summary>
     public partial class App : Application
     {
+       
     }
 }

@@ -17,7 +17,7 @@ namespace HRMS_MVVM.views
     /// <summary>
     /// InformationQuery.xaml 的交互逻辑
     /// </summary>
-    public partial class InformationQuery : Window
+    public partial class InformationQuery : CustomWindow
     {
         public InformationQuery()
         {

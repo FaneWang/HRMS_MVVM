@@ -74,6 +74,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="commands\DelegateCommand.cs" />
+    <Compile Include="CustomWindow.cs" />
+    <Compile Include="viewModels\InformationInputViewModel.cs" />
     <Compile Include="views\InformationInput.xaml.cs">
       <DependentUpon>InformationInput.xaml</DependentUpon>
     </Compile>

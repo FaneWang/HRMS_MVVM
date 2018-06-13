@@ -1,12 +1,12 @@
-﻿<Window
+﻿<local:CustomWindow
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HRMS_MVVM" x:Class="HRMS_MVVM.MainWindow"
-        xmlns:viewModels="clr-namespace:HRMS_MVVM.viewModels" IsEnabled="{Binding CanClose}"
-        mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowState="Maximized"
-        Title="企业人事管理系统" Height="450" Width="800">
+        xmlns:viewModels="clr-namespace:HRMS_MVVM.viewModels" CloseState="{Binding CanClose}"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowState="Maximized" CurrentState="{Binding ChildrenState}" 
+        Title="企业人事管理系统" Height="450" Width="800" Closing="CustomWindow_Closing">
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -66,4 +66,4 @@
             <TextBlock Grid.Row="3" Text="@Fane Copyright" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Grid>
     </Grid>
-</Window>
+</local:CustomWindow>

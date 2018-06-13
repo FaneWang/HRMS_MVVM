@@ -11,8 +11,11 @@ using HRMS_MVVM.views;
 
 namespace HRMS_MVVM.viewModels
 {
-    class MainWindowViewModel:NotificationParent
+    class MainWindowViewModel : NotificationParent
     {
+        private Dictionary<Object, bool> available = new Dictionary<object, bool>();
+        private InformationInput informationInput;
+
         #region 命令属性
         public DelegateCommand dataInputCommand { get; set; }
         public DelegateCommand dataQueryCommand { get; set; }
@@ -25,10 +28,28 @@ namespace HRMS_MVVM.viewModels
         public DelegateCommand closeCommand { get; set; }
         #endregion
 
+        #region 数据属性，处理子窗口状态
+        private int childrenState = 1;
+        public int ChildrenState
+        {
+            get
+            {
+                return childrenState;
+            }
+            set
+            {
+                childrenState = value;
+                this.raisePropertyChanged("ChildrenState");
+            }
+        }
+        #endregion
+
         #region 数据属性，处理窗口关闭事件
-        private bool canClose = true;
-        public bool CanClose {
-            get {
+        private int canClose = 1;
+        public int CanClose
+        {
+            get
+            {
                 return canClose;
             }
             set
@@ -42,7 +63,8 @@ namespace HRMS_MVVM.viewModels
         #region 构造函数,初始化命令
         public MainWindowViewModel()
         {
-            this.dataInputCommand = new DelegateCommand(new Action<object>(dataInputExecute),new Func<Object,bool>(dataInputCanExecute));
+            #region 初始化命令
+            this.dataInputCommand = new DelegateCommand(new Action<object>(dataInputExecute), new Func<Object, bool>(dataInputCanExecute));
             this.dataQueryCommand = new DelegateCommand(new Action<object>(dataQueryExecute), new Func<Object, bool>(dataQueryCanExecute));
             this.loginCommand = new DelegateCommand(new Action<object>(loginExecute), new Func<Object, bool>(loginCanExecute));
             this.logoutCommand = new DelegateCommand(new Action<object>(logoutExecute), new Func<Object, bool>(logoutCanExecute));
@@ -51,19 +73,34 @@ namespace HRMS_MVVM.viewModels
             this.newCommand = new DelegateCommand(new Action<object>(newExecute), new Func<Object, bool>(newCanExecute));
             this.saveCommand = new DelegateCommand(new Action<object>(saveExecute), new Func<Object, bool>(saveCanExecute));
             this.closeCommand = new DelegateCommand(new Action<object>(closeExecute), new Func<Object, bool>(closeCanExecute));
+            #endregion
+
+            #region 初始化命令状态
+            available["dataInput"] = true;
+            #endregion            
         }
         #endregion
 
         #region dataInput
+        //处理命令的可用状态
         public bool dataInputCanExecute(Object parameter)
         {
-            return true;
+            //如果子窗体被调用过，且处于不可用状态（已经关闭),则命令可用，否则不可用
+            if (this.informationInput != null)
+            {
+                if (this.informationInput.CloseState == 0)
+                {
+                    available["dataInput"] = true;
+                } 
+            }
+            return available["dataInput"];
         }
 
         public void dataInputExecute(Object parameter)
         {
-            InformationInput informationInput = new InformationInput();
-            informationInput.Show();
+            this.informationInput = new InformationInput();
+            this.informationInput.Show();
+            available["dataInput"] = false;
         }
         #endregion
 
@@ -159,7 +196,8 @@ namespace HRMS_MVVM.viewModels
 
         public void closeExecute(Object parameter)
         {
-            this.CanClose = false;
+            this.CanClose = 0;
+            //this.informationInput.CloseState = 0;
         }
         #endregion
     }
