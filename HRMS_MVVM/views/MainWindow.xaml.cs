@@ -63,11 +63,6 @@ namespace HRMS_MVVM
             frame.Content = page2;
         }
 
-        private void CustomWindow_Closing(object sender, CancelEventArgs e)
-        {
-            this.CurrentState = 0;
-        }
-
         //private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         //{
         //    this.IsEnabled = false;

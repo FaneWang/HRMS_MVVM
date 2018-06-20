@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ServiceModel;
 using System.ServiceModel.Description;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace HRMS_SERVICE_HOST
+namespace HRMS_SERVICE_HOST_1
 {
     class Program
     {
         static void Main(string[] args)
         {
-            using (ServiceHost host = new ServiceHost(typeof(HRMS_SERVICE.ServiceTest)))
+            using (ServiceHost host = new ServiceHost(typeof(HRMS_SERVICE.PictureHandle)))
             {
                 //判断是否打开连接，没打开就打开
                 if (host.State != CommunicationState.Opening)

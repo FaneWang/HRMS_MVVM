@@ -20,22 +20,22 @@ namespace HRMS_MVVM.views
     /// <summary>
     /// InformationInput.xaml 的交互逻辑
     /// </summary>
-    public partial class InformationInput : CustomWindow
+    public partial class InformationEdit : CustomWindow
     {
-        public InformationInput()
+        public InformationEdit()
         {
             InitializeComponent();
-            this.DataContext = new InformationInputViewModel();
+            this.DataContext = new InformationEditViewModel();
             DependencyPropertyDescriptor descriptor = DependencyPropertyDescriptor.FromProperty(MainWindow.CloseStateProperty, typeof(MainWindow));
             descriptor.AddValueChanged(this, CloseStatePropertyChanged);
             //关闭后事件
             //this.Closed += InformationInput_Closed;
             //关闭前事件
-            this.Closing += InformationInput_Closing;
+            this.Closing += InformationEdit_Closing;
         }
 
         //关闭前事件处理程序
-        private void InformationInput_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void InformationEdit_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             this.CurrentState = 0;
         }
@@ -57,7 +57,7 @@ namespace HRMS_MVVM.views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
     }
 }

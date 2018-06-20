@@ -15,8 +15,10 @@ using MongoDB.Bson;
 
 namespace HRMS_MVVM.viewModels
 {
-    class InformationInputViewModel:NotificationParent
+    class InformationEditViewModel : NotificationParent
     {
+        private MongoClient client = DBUtils.GetMongoClient();
+
         #region 数据属性，处理窗口关闭事件
         private int canClose = 1;
         public int CanClose
@@ -92,7 +94,8 @@ namespace HRMS_MVVM.viewModels
         public ObservableCollection<string> Politics { get; set; }
         public ObservableCollection<string> Provinces { get; set; }
         private ObservableCollection<string> cities;
-        public ObservableCollection<string> Cities {
+        public ObservableCollection<string> Cities
+        {
             get { return cities; }
             set
             {
@@ -107,18 +110,33 @@ namespace HRMS_MVVM.viewModels
         public DelegateCommand getCityCommand { get; set; }
         public DelegateCommand photoChooseCommand { get; set; }
         public DelegateCommand photoDeleteCommand { get; set; }
-        public DelegateCommand addCommand { get; set; }
+        public DelegateCommand editCommand { get; set; }
         #endregion
 
-        public InformationInputViewModel()
+        public InformationEditViewModel()
         {
             this.closeCommand = new DelegateCommand(new Action<object>(closeExecute), new Func<Object, bool>(closeCanExecute));
             this.getCityCommand = new DelegateCommand(new Action<object>(getCityExecute));
             this.photoChooseCommand = new DelegateCommand(new Action<object>(photoChooseExecute));
             this.photoDeleteCommand = new DelegateCommand(new Action<object>(photoDeleteExecute));
-            this.addCommand = new DelegateCommand(new Action<object>(addExecute));
+            this.editCommand = new DelegateCommand(new Action<object>(editExecute));
             #region 初始化INformation属性
-            this.Information = new Information();
+            var database = client.GetDatabase("hrms");
+            var collection = database.GetCollection<BsonDocument>("informations");
+            var filter = Builders<BsonDocument>.Filter.Eq("Id", "5436");
+            var projection = Builders<BsonDocument>.Projection.Exclude("_id");
+            var doc = collection.Find(filter).Project(projection).First();
+            string jsonStr = doc.ToJson();
+            this.Information = JsonUtils.DeserializeJsonToObject<Information>(jsonStr);
+            #endregion
+
+            #region 初始化照片
+            ServiceProxy.ServiceTestClient serviceTestClient = new ServiceProxy.ServiceTestClient("WSHttpBinding_IServiceTest");
+            string imgStr = serviceTestClient.PicDownload(Information.Photo);
+            Image img = Utils.ByteArrayToImg(imgStr);
+            string path = "C:/Users/victo/Desktop/Csharp/HRMS_MVVM/HRMS_MVVM/images/" + Information.Photo + ".jpg";
+            img.Save(path);
+            Photo = path;
             #endregion
 
             #region 初始化民族
@@ -127,21 +145,18 @@ namespace HRMS_MVVM.viewModels
             Nations.Add("土家族");
             Nations.Add("汉族");
             Nations.Add("苗族");
-            Information.Nation = "请选择";
             #endregion
             #region 性别
             Genders = new ObservableCollection<string>();
             Genders.Add("请选择");
             Genders.Add("男");
             Genders.Add("女");
-            Information.Gender = "请选择";
             #endregion
             #region 婚姻
             Marriages = new ObservableCollection<string>();
             Marriages.Add("请选择");
             Marriages.Add("已婚");
             Marriages.Add("未婚");
-            Information.Marriage = "请选择";
             #endregion
             #region 学历
             Educations = new ObservableCollection<string>();
@@ -151,7 +166,6 @@ namespace HRMS_MVVM.viewModels
             Educations.Add("本科");
             Educations.Add("硕士");
             Educations.Add("博士");
-            Information.Education = "请选择";
             #endregion
             #region 政治面貌
             Politics = new ObservableCollection<string>();
@@ -160,18 +174,28 @@ namespace HRMS_MVVM.viewModels
             Politics.Add("共青团员");
             Politics.Add("中共党员");
             Politics.Add("其他");
-            Information.Politic = "请选择";
             #endregion
             #region 籍贯
             Provinces = new ObservableCollection<string>();
             Provinces.Add("请选择");
             Provinces.Add("湖北");
             Provinces.Add("四川");
-            Information.Province = "请选择";
 
             Cities = new ObservableCollection<string>();
-            Cities.Add("请选择");
-            City = "请选择";
+            if (Information.Province == "湖北")
+            {
+                Cities.Add("武汉");
+                Cities.Add("恩施");
+                Cities.Add("宜昌");
+                City = Information.City;
+            }
+            else if (Information.Province == "四川")
+            {
+                Cities.Add("成都");
+                Cities.Add("德阳");
+                Cities.Add("绵阳");
+                City = Information.City;
+            }
             #endregion
         }
 
@@ -258,8 +282,8 @@ namespace HRMS_MVVM.viewModels
         }
         #endregion
 
-        #region addExecute
-        public void addExecute(Object parameter)
+        #region editExecute
+        public void editExecute(Object parameter)
         {
             this.Information.City = City;
             if (string.IsNullOrWhiteSpace(Information.Id))
@@ -284,12 +308,14 @@ namespace HRMS_MVVM.viewModels
                 MongoClient client = DBUtils.GetMongoClient();
                 var database = client.GetDatabase("hrms");
                 var collection = database.GetCollection<BsonDocument>("informations");
-                collection.InsertOne(doc);
+                var filter = Builders<BsonDocument>.Filter.Eq("Id", "5436");
+                var update = Builders<BsonDocument>.Update.Set("Id", Information.Id).Set("Name", Information.Name).Set("Province", Information.Province).Set("City", Information.City);
+                collection.UpdateOne(filter, update);
                 this.CanClose = 0;
             }
             catch (Exception e)
             {
-                System.Windows.MessageBox.Show("添加失败，请联系管理员！");
+                System.Windows.MessageBox.Show("编辑失败，请联系管理员！");
                 return;
             }
         }

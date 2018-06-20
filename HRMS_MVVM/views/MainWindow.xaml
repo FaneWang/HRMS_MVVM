@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HRMS_MVVM" x:Class="HRMS_MVVM.MainWindow"
         xmlns:viewModels="clr-namespace:HRMS_MVVM.viewModels" CloseState="{Binding CanClose}"
-        mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowState="Maximized" CurrentState="{Binding ChildrenState}" 
-        Title="企业人事管理系统" Height="450" Width="800" Closing="CustomWindow_Closing">
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowState="Maximized"  
+        Title="企业人事管理系统" Height="450" Width="800">
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -25,6 +25,7 @@
                 </MenuItem>
                 <MenuItem Header="人事管理" Margin="5,0,0,0">
                     <MenuItem Header="人事信息录入" Command="{Binding dataInputCommand}"/>
+                    <MenuItem Header="人事信息修改" Command="{Binding dataEditCommand}"/>
                     <MenuItem Header="人事信息查询" Command="{Binding dataQueryCommand}"/>
                 </MenuItem>
                 <MenuItem Header="登录管理" Margin="5,0,0,0">
@@ -34,6 +35,7 @@
             </Menu>
             <ToolBar Grid.Row="1">
                 <Button Content="人事信息录入" Command="{Binding dataInputCommand}" Margin="5,0,0,0"/>
+                <Button Content="人事信息修改" Command="{Binding dataEditCommand}" Margin="5,0,0,0"/>
                 <Button Content="人事信息查询" Command="{Binding dataQueryCommand}" Margin="5,0,0,0"/>
                 <Button Content="登录" Command="New" Margin="5,0,0,0"/>
                 <Button Content="登出" Command="New" Margin="5,0,0,0"/>

@@ -15,9 +15,11 @@ namespace HRMS_MVVM.viewModels
     {
         private Dictionary<Object, bool> available = new Dictionary<object, bool>();
         private InformationInput informationInput;
+        private InformationEdit informationEdit;
 
         #region 命令属性
         public DelegateCommand dataInputCommand { get; set; }
+        public DelegateCommand dataEditCommand { get; set; }
         public DelegateCommand dataQueryCommand { get; set; }
         public DelegateCommand loginCommand { get; set; }
         public DelegateCommand logoutCommand { get; set; }
@@ -26,22 +28,6 @@ namespace HRMS_MVVM.viewModels
         public DelegateCommand newCommand { get; set; }
         public DelegateCommand saveCommand { get; set; }
         public DelegateCommand closeCommand { get; set; }
-        #endregion
-
-        #region 数据属性，处理子窗口状态
-        private int childrenState = 1;
-        public int ChildrenState
-        {
-            get
-            {
-                return childrenState;
-            }
-            set
-            {
-                childrenState = value;
-                this.raisePropertyChanged("ChildrenState");
-            }
-        }
         #endregion
 
         #region 数据属性，处理窗口关闭事件
@@ -65,6 +51,7 @@ namespace HRMS_MVVM.viewModels
         {
             #region 初始化命令
             this.dataInputCommand = new DelegateCommand(new Action<object>(dataInputExecute), new Func<Object, bool>(dataInputCanExecute));
+            this.dataEditCommand = new DelegateCommand(new Action<object>(dataEditExecute), new Func<Object, bool>(dataEditCanExecute));
             this.dataQueryCommand = new DelegateCommand(new Action<object>(dataQueryExecute), new Func<Object, bool>(dataQueryCanExecute));
             this.loginCommand = new DelegateCommand(new Action<object>(loginExecute), new Func<Object, bool>(loginCanExecute));
             this.logoutCommand = new DelegateCommand(new Action<object>(logoutExecute), new Func<Object, bool>(logoutCanExecute));
@@ -72,12 +59,9 @@ namespace HRMS_MVVM.viewModels
             this.switchCommand2 = new DelegateCommand(new Action<object>(switch2Execute), new Func<Object, bool>(switch2CanExecute));
             this.newCommand = new DelegateCommand(new Action<object>(newExecute), new Func<Object, bool>(newCanExecute));
             this.saveCommand = new DelegateCommand(new Action<object>(saveExecute), new Func<Object, bool>(saveCanExecute));
-            this.closeCommand = new DelegateCommand(new Action<object>(closeExecute), new Func<Object, bool>(closeCanExecute));
+            this.closeCommand = new DelegateCommand(new Action<object>(closeExecute));
             #endregion
-
-            #region 初始化命令状态
-            available["dataInput"] = true;
-            #endregion            
+            
         }
         #endregion
 
@@ -88,19 +72,40 @@ namespace HRMS_MVVM.viewModels
             //如果子窗体被调用过，且处于不可用状态（已经关闭),则命令可用，否则不可用
             if (this.informationInput != null)
             {
-                if (this.informationInput.CloseState == 0)
+                if (this.informationInput.CurrentState == 1 )
                 {
-                    available["dataInput"] = true;
+                    return false;
                 } 
             }
-            return available["dataInput"];
+            return true;
         }
 
         public void dataInputExecute(Object parameter)
         {
             this.informationInput = new InformationInput();
-            this.informationInput.Show();
-            available["dataInput"] = false;
+            this.informationInput.ShowDialog();
+        }
+        #endregion
+
+        #region dataEdit
+        //处理命令的可用状态
+        public bool dataEditCanExecute(Object parameter)
+        {
+            //如果子窗体被调用过，且处于不可用状态（已经关闭),则命令可用，否则不可用
+            if (this.informationEdit != null)
+            {
+                if (this.informationEdit.CurrentState == 1)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public void dataEditExecute(Object parameter)
+        {
+            this.informationEdit = new InformationEdit();
+            this.informationEdit.ShowDialog();
         }
         #endregion
 
@@ -189,11 +194,7 @@ namespace HRMS_MVVM.viewModels
         #endregion
 
         #region close命令改变CanClose属性
-        public bool closeCanExecute(Object parameter)
-        {
-            return true;
-        }
-
+        
         public void closeExecute(Object parameter)
         {
             this.CanClose = 0;
